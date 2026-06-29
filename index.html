@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helara — Café de altura del Perú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d1a14;
+    --paper:#f6f1e7;
+    --paper-2:#efe7d6;
+    --clay:#9a4f2c;
+    --clay-deep:#6e3417;
+    --leaf:#3f4a30;
+    --gold:#c08a3e;
+    --line:rgba(29,26,20,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--clay);font-weight:600;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.08;letter-spacing:-.01em}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,241,231,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Fraunces',serif;font-size:24px;font-weight:600;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+  .brand span{color:var(--clay)}
+  .nav-links{display:flex;gap:34px;list-style:none}
+  .nav-links a{color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;opacity:.8;transition:opacity .2s}
+  .nav-links a:hover{opacity:1}
+  .nav-cta{
+    background:var(--clay);color:var(--paper);padding:11px 20px;border-radius:100px;
+    font-size:14px;font-weight:600;text-decoration:none;transition:background .2s;
+  }
+  .nav-cta:hover{background:var(--clay-deep)}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px}
+  .menu-btn span{width:24px;height:2px;background:var(--ink);display:block}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;background:var(--ink)}
+  .hero img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;
+  }
+  .hero-inner{position:relative;padding:120px 0 110px;color:var(--paper)}
+  .hero h1{font-size:clamp(44px,8vw,86px);color:var(--paper);max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p{margin-top:26px;max-width:46ch;font-size:18px;opacity:.92}
+  .hero .actions{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{background:var(--clay);color:var(--paper);padding:15px 28px;border-radius:100px;font-weight:600;text-decoration:none;transition:background .2s}
+  .btn-primary:hover{background:var(--clay-deep)}
+  .btn-ghost{border:1px solid rgba(246,241,231,.5);color:var(--paper);padding:15px 28px;border-radius:100px;font-weight:600;text-decoration:none;transition:border-color .2s}
+  .btn-ghost:hover{border-color:var(--paper)}
+
+  /* STATS STRIP */
+  .strip{background:var(--paper-2);border-bottom:1px solid var(--line)}
+  .strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:38px 24px}
+  .stat .num{font-family:'Fraunces',serif;font-size:42px;color:var(--clay-deep);line-height:1}
+  .stat .lbl{font-size:13px;letter-spacing:.04em;color:var(--ink);opacity:.7;margin-top:8px}
+
+  /* SECTION base */
+  section{padding:92px 0}
+  .lead{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .lead h2{font-size:clamp(30px,4.5vw,46px);margin:14px 0 22px}
+  .lead p{font-size:17px;opacity:.86;margin-bottom:16px}
+  .lead .media{border-radius:14px;overflow:hidden;aspect-ratio:4/5}
+  .lead .media img{width:100%;height:100%;object-fit:cover}
+
+  /* OFFER cards */
+  .head-center{text-align:center;max-width:60ch;margin:0 auto 56px}
+  .head-center h2{font-size:clamp(30px,4.5vw,46px);margin:14px 0 16px}
+  .head-center p{opacity:.84;font-size:17px}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .25s}
+  .card:hover{transform:translateY(-5px)}
+  .card .ph{aspect-ratio:3/2;overflow:hidden}
+  .card .ph img{width:100%;height:100%;object-fit:cover}
+  .card .body{padding:26px}
+  .card h3{font-size:22px;margin-bottom:10px}
+  .card p{font-size:15px;opacity:.82}
+
+  /* PROCESS */
+  .process{background:var(--leaf);color:var(--paper)}
+  .process .eyebrow{color:var(--gold)}
+  .process h2{color:var(--paper);font-size:clamp(30px,4.5vw,46px);margin:14px 0 50px;max-width:18ch}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+  .step .n{font-family:'Fraunces',serif;font-size:18px;color:var(--gold);padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid rgba(246,241,231,.25)}
+  .step h3{color:var(--paper);font-size:21px;margin-bottom:10px}
+  .step p{opacity:.82;font-size:15px}
+
+  /* QUOTE */
+  .quote{text-align:center}
+  .quote blockquote{font-family:'Fraunces',serif;font-size:clamp(26px,4vw,40px);line-height:1.25;max-width:20ch;margin:0 auto;letter-spacing:-.01em}
+  .quote .who{margin-top:28px;font-size:14px;letter-spacing:.06em;opacity:.7}
+
+  /* CTA */
+  .final{background:var(--clay);color:var(--paper);text-align:center}
+  .final h2{color:var(--paper);font-size:clamp(32px,5vw,54px);max-width:16ch;margin:0 auto 22px}
+  .final p{max-width:44ch;margin:0 auto 34px;opacity:.92;font-size:17px}
+  .final .btn-primary{background:var(--paper);color:var(--clay-deep)}
+  .final .btn-primary:hover{background:#fff}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:var(--paper);padding:64px 0 34px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:42px;border-bottom:1px solid rgba(246,241,231,.16)}
+  .foot-grid .brand{color:var(--paper)}
+  .foot-grid p{opacity:.7;font-size:15px;margin-top:14px;max-width:34ch}
+  .foot-col h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.6;margin-bottom:16px;font-weight:600}
+  .foot-col a{display:block;color:var(--paper);text-decoration:none;opacity:.82;font-size:15px;margin-bottom:10px}
+  .foot-col a:hover{opacity:1}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:24px;font-size:13px;opacity:.6;flex-wrap:wrap;gap:8px}
+
+  /* RESPONSIVE */
+  @media(max-width:860px){
+    .nav-links,.nav-cta{display:none}
+    .menu-btn{display:flex}
+    .strip .wrap{grid-template-columns:1fr;gap:28px}
+    .lead{grid-template-columns:1fr;gap:34px}
+    .lead .media{aspect-ratio:16/11;order:-1}
+    .cards{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr;gap:30px}
+    .foot-grid{grid-template-columns:1fr;gap:30px}
+    section{padding:64px 0}
+    .hero-inner{padding:84px 0 78px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#" class="brand">Hel<span>a</span>ra</a>
+      <ul class="nav-links">
+        <li><a href="#origen">Origen</a></li>
+        <li><a href="#cafes">Cafés</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#contacto" class="nav-cta">Hablemos</a>
+      <button class="menu-btn" aria-label="Menú"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&w=1600&q=80" alt="Plantación de café en la montaña">
+  <div class="wrap">
+    <div class="hero-inner">
+      <p class="eyebrow" style="color:var(--gold)">Café de especialidad · Cajamarca, Perú</p>
+      <h1>Del corazón de los <em>Andes</em> a tu taza</h1>
+      <p>Cultivamos café de altura junto a familias productoras, con trazabilidad de grano por finca y un tueste que respeta cada origen.</p>
+      <div class="actions">
+        <a href="#cafes" class="btn-primary">Conoce nuestros cafés</a>
+        <a href="#origen" class="btn-ghost">Nuestra historia</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="stat"><div class="num">1.850 m</div><div class="lbl">Altitud media de cultivo sobre el mar</div></div>
+    <div class="stat"><div class="num">320+</div><div class="lbl">Familias productoras aliadas</div></div>
+    <div class="stat"><div class="num">100%</div><div class="lbl">Grano arábica trazable por finca</div></div>
+  </div>
+</div>
+
+<section id="origen">
+  <div class="wrap lead">
+    <div class="text">
+      <p class="eyebrow">Nuestro origen</p>
+      <h2>Un café con nombre, rostro y montaña</h2>
+      <p>Helara nació en las laderas de Cajamarca con una idea simple: que cada grano pudiera contar de dónde viene y quién lo cultivó. Trabajamos directamente con los productores, sin intermediarios que diluyan el origen.</p>
+      <p>El clima frío de altura y la cosecha selectiva a mano dan como resultado tazas limpias, dulces y con cuerpo. Cada lote conserva el carácter de su valle.</p>
+    </div>
+    <div class="media">
+      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1000&q=80" alt="Taza de café recién servida">
+    </div>
+  </div>
+</section>
+
+<section id="cafes" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="head-center">
+      <p class="eyebrow">Nuestros cafés</p>
+      <h2>Tres orígenes, tres caracteres</h2>
+      <p>Seleccionamos lotes por su perfil de taza y los tostamos en pequeñas tandas para preservar lo que los hace únicos.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1442550528053-c431ecb55509?auto=format&fit=crop&w=800&q=80" alt="Granos de café tostados"></div>
+        <div class="body">
+          <h3>Valle Alto</h3>
+          <p>Notas a panela, almendra y manzana roja. Cuerpo medio y dulzor prolongado. Ideal para filtrado.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80" alt="Café preparado en taza"></div>
+        <div class="body">
+          <h3>Reserva Andina</h3>
+          <p>Floral y cítrico, con acidez brillante y final a miel. Nuestro lote más fragante de cosecha tardía.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&w=800&q=80" alt="Granos de café verde y tostado"></div>
+        <div class="body">
+          <h3>Tueste Oscuro</h3>
+          <p>Chocolate amargo, nuez y caramelo. Intenso y redondo, pensado para espresso y leche.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="proceso" class="process">
+  <div class="wrap">
+    <p class="eyebrow">Del grano a la taza</p>
+    <h2>Cuidamos cada etapa del recorrido</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">Cosecha</div>
+        <h3>Recolección selectiva</h3>
+        <p>Solo se recogen las cerezas en su punto óptimo de maduración, grano por grano, a mano.</p>
+      </div>
+      <div class="step">
+        <div class="n">Beneficio</div>
+        <h3>Lavado y secado solar</h3>
+        <p>Fermentación controlada y secado en camas elevadas para fijar dulzor y limpieza de taza.</p>
+      </div>
+      <div class="step">
+        <div class="n">Tueste</div>
+        <h3>Tandas pequeñas</h3>
+        <p>Perfilamos cada origen por separado para realzar lo que lo distingue, sin sobre-tostar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <p class="eyebrow">Nuestra promesa</p>
+    <blockquote>“Un café honesto empieza por saber de dónde viene.”</blockquote>
+    <p class="who">— Equipo Helara</p>
+  </div>
+</section>
+
+<section id="contacto" class="final">
+  <div class="wrap">
+    <h2>Llevemos el origen a tu negocio</h2>
+    <p>Trabajamos con cafeterías, restaurantes y tiendas que valoran la trazabilidad. Cuéntanos qué buscas y armamos una propuesta a tu medida.</p>
+    <a href="mailto:hola@helara.pe" class="btn-primary">hola@helara.pe</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="brand">Hel<span style="color:var(--gold)">a</span>ra</a>
+        <p>Café de especialidad cultivado en altura en Cajamarca, Perú. Trazable, tostado en tandas pequeñas.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Empresa</h4>
+        <a href="#origen">Origen</a>
+        <a href="#cafes">Cafés</a>
+        <a href="#proceso">Proceso</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a href="mailto:hola@helara.pe">hola@helara.pe</a>
+        <a href="#">+51 999 000 000</a>
+        <a href="#">Cajamarca, Perú</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Helara Café. Todos los derechos reservados.</span>
+      <span>Hecho en el Perú</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
